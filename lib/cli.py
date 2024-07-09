@@ -21,46 +21,64 @@ def main_menu():
         choice = input("> ")
         if choice == "1":
             user_account_menu()
-        if choice == "2":
+        elif choice == "2":
             server_menu()
         elif choice == "3":
             exit_program()
         else:
-            print("Invalid choice! GAME OVER")
+            print("")
+            print("Invalid choice. The Main Menu returns a Critical Hit! GAME OVER")
+            print("")
+            exit()
 
 def main_menu_prompt():
+    print("")
+    print("----------------------")
     print("Welcome to DATAQUEST!")
+    print("----------------------")
     print("ADMIN access granted!")
+    print("")
     print("Please select an option:")
+    print("")
     print("1. User Account Menu")
     print("2. Server Menu")
     print("3. Exit DataQuest")
+    print("")
 
 def user_account_menu():
-    while True: 
+    while True:
         user_account_menu_prompt()
         choice = input("> ")
         if choice == "1": 
             create_user_account()
-        if choice == "2":
+        elif choice == "2":
             edit_user_account()
-        if choice == "3":
+        elif choice == "3":
             lookup_user_account()
-        if choice == "4":
+        elif choice == "4":
             add_user_to_server()
-        if choice == "5":
+        elif choice == "5":
             remove_user_from_server()
-        if choice == "6":
+        elif choice == "6":
             delete_user_account()
-        if choice == "7":
+        elif choice == "7":
             main_menu()
-        else: 
-            print("Invalid choice! GAME OVER")
+        else:
+            print("") 
+            print("Invalid choice. The User Account Menu Returns a Critical Hit!")
+            print("GAME OVER")
+            print("")
+            exit()
 
 
 def user_account_menu_prompt():
+    print("")
+    print("-------------------------")
     print("DataQuest User Accounts")
+    print("-------------------------")
+    print("")
     print("Please select an option:")
+    print("")
     print("1. Create User Account")
     print("2. Edit User Account")
     print("3. Lookup Server Activity")
@@ -68,32 +86,53 @@ def user_account_menu_prompt():
     print("5. Remove User from Server")
     print("6. Delete User Account")
     print("7. Return to Main Menu")
+    print("")
+
+""" def create_user_account_menu():
+    while True:
+        create_user_account_prompt()
+        choice = input("> ")
+        if choice == "1":
+            
+def create_user_account_prompt():
+    print("Enter A Username") """
+
 
 def server_menu():
-    while True: 
+    while True:
         server_menu_prompt()
         choice = input("> ")
         if choice == "1": 
             create_server()
-        if choice == "2":
+        elif choice == "2":
             edit_server()
-        if choice == "3":
+        elif choice == "3":
             delete_server()
-        if choice == "4":
+        elif choice == "4":
             lookup_active_users()
-        if choice == "5":
+        elif choice == "5":
             main_menu()
-        else: 
-            print("Invalid choice! GAME OVER")
+        else:
+            print("")
+            print("Invalid choice. The Server Menu Returns a Critical Hit!")
+            print("GAME OVER")
+            print("")
+            exit()
 
 def server_menu_prompt():
+    print("")
+    print("--------------------")
     print("DataQuest Servers")
+    print("--------------------")
+    print("")
     print("Please select an option:")
+    print("")
     print("1. Create Server")
     print("2. Edit Server")
-    print("3. Lookup Active Users")
-    print("4. Delete server")
+    print("3. Delete server")
+    print("4. Lookup Active Users")
     print("5. Return to Main Menu")
+    print("")
 
 if __name__ == "__main__":
     main_menu()

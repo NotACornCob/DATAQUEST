@@ -4,52 +4,79 @@ import click
 from models.user import User
 
 def create_user_account():
-    while True:
-        print("Enter a Username")
-        username = input("")
-        if len(username) > 5:
-            print("Enter a Password")
-            password = input("")
-            if len(password) > 5: 
-                User.create_table()
-                User.create(username,password)
-                print(f"Account Created!")
-                exit()
-            else: 
-                print("Password must be more than 5 characters")
+    print("Enter a Username")
+    username = input("")
+    if len(username) > 5:
+        print("Enter a Password")
+        password = input("")
+        if len(password) > 5: 
+            User.create_table()
+            User.create(username,password)
+            print("")
+            print("***Account Created!***")
+            print("")
+            print("Returning to User Menu")
         else: 
-            print("Username must be more than 5 characters")
+            print("Password must be more than 5 characters")
+    else: 
+        print("Username must be more than 5 characters")
 
 def edit_user_account():
-        return print("edited user account!")
-        exit()
+        print("")
+        print("***Edited User Account***")
+        print("")
+        print("Returning to User Menu!")
 
 def delete_user_account():
-        return print("deleted user account!")
+        print("")
+        print("***Deleted User Account***")
+        print("")
+        print("Returning to User Menu!")
+
 
 def lookup_user_account():
-        return print("looked up user account")
-        
+        print("")
+        print("***Looked Up User Account***")
+        print("")
+        print("Returning to User Menu!")
 
 def add_user_to_server():
-        return print("added user to server")
+        print("")
+        print("***Added User to Server***")
+        print("")
+        print("Returning to User Menu!")
 
 def remove_user_from_server():
-        return("deleted user from server")
-        
+        print("")
+        print("***Deleted User From Server***")
+        print("")
+        print("Returning to User Menu!")
 
 def create_server():
-        return("server created")
+        print("")
+        print("***Server Created***")
+        print("")
+        print("Returning to User Menu!")
         
 def edit_server():
-        return("edited server")
+        print("")
+        print("***Edited Server***")
+        print("")
+        print("Returning to User Menu")
 
 def delete_server():
-        return("server deleted")
+        print("")
+        print("***Server Deleted***")
+        print("")
+        print("Returning to User Menu")
 
 def lookup_active_users():
-        return ("found active users")
+        print("")
+        print("***Found Active Users***")
+        print("")
+        print("Returning to User Menu")
 
 def exit_program():
+    print("")
     print("See you next time!")
     exit()
