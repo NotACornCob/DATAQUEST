@@ -34,17 +34,16 @@ class User:
 
     @classmethod 
     def create_table(cls):
-        '''Create a table for persistant user instances'''
-    sql = """
-    CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY,
-    username TEXT,
-    password TEXT,
-    server_id INTEGER,
-    FOREIGN KEY (server_id) REFERENCES servers(id))
-    """ 
-    CURSOR.execute(sql)
-    CONN.commit()
+        sql = """
+        CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        username TEXT,
+        password TEXT,
+        server_id INTEGER,
+        FOREIGN KEY (server_id) REFERENCES servers(id))
+        """ 
+        CURSOR.execute(sql)
+        CONN.commit()
 
     @classmethod
     def drop_table(cls):
@@ -71,7 +70,7 @@ class User:
         CURSOR.execute(sql,(str(self.name),str(self.password)))
         CONN.commit()
 
-    def delete(self):
+    def delete_user(self):
         """Delete row corresponding to current user instance"""
         sql = """
         DELETE FROM users
@@ -83,7 +82,7 @@ class User:
         self.id = None
 
     @classmethod
-    def create(cls,name,password):
+    def create_user(cls,name,password):
         '''Initialize a user instance and save user instance data to database'''
         user = cls(str(name),str(password))
         user.save(name,password)

@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 
-from helpers import (
+from user_menu_helpers import (
     exit_program,
-    create_user_account,
-    edit_user_account,
-    delete_user_account,
-    lookup_user_account,
-    add_user_to_server,
-    remove_user_from_server,
-    delete_user_account,
+    create_user,
+    delete_user,
+    lookup_user,
+    all_users,
+)
+
+from server_menu_helpers import (
+    exit_program,
     create_server,
-    edit_server,
     delete_server,
-    lookup_active_users,
+    lookup_server,
+    all_servers,
 )
 
 def main_menu():
@@ -50,19 +51,15 @@ def user_account_menu():
         user_account_menu_prompt()
         choice = input("> ")
         if choice == "1": 
-            create_user_account()
+            create_user()
         elif choice == "2":
-            edit_user_account()
+            delete_user()
         elif choice == "3":
-            lookup_user_account()
+            lookup_user()
         elif choice == "4":
-            add_user_to_server()
+            all_users()
         elif choice == "5":
-            remove_user_from_server()
-        elif choice == "6":
-            delete_user_account()
-        elif choice == "7":
-            main_menu()
+            main_menu()   
         else:
             print("") 
             print("Invalid choice. The User Account Menu Returns a Critical Hit!")
@@ -80,23 +77,11 @@ def user_account_menu_prompt():
     print("Please select an option:")
     print("")
     print("1. Create User Account")
-    print("2. Edit User Account")
-    print("3. Lookup Server Activity")
-    print("4. Add User to Server")
-    print("5. Remove User from Server")
-    print("6. Delete User Account")
-    print("7. Return to Main Menu")
+    print("2. Delete User Account")
+    print("3. Lookup User by ID")
+    print("4. List All Users")
+    print("5. Return to Main Menu")
     print("")
-
-""" def create_user_account_menu():
-    while True:
-        create_user_account_prompt()
-        choice = input("> ")
-        if choice == "1":
-            
-def create_user_account_prompt():
-    print("Enter A Username") """
-
 
 def server_menu():
     while True:
@@ -105,11 +90,11 @@ def server_menu():
         if choice == "1": 
             create_server()
         elif choice == "2":
-            edit_server()
-        elif choice == "3":
             delete_server()
+        elif choice == "3":
+            lookup_server()
         elif choice == "4":
-            lookup_active_users()
+            all_servers()
         elif choice == "5":
             main_menu()
         else:
@@ -128,16 +113,11 @@ def server_menu_prompt():
     print("Please select an option:")
     print("")
     print("1. Create Server")
-    print("2. Edit Server")
-    print("3. Delete server")
-    print("4. Lookup Active Users")
+    print("2. Delete Server")
+    print("3. Lookup Server by ID")
+    print("4. List All Servers")
     print("5. Return to Main Menu")
     print("")
 
 if __name__ == "__main__":
     main_menu()
-
-
-def exit_program():
-    print("See you next time!")
-    exit()
