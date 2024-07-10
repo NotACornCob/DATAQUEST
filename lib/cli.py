@@ -14,6 +14,7 @@ from server_menu_helpers import (
     delete_server,
     lookup_server,
     all_servers,
+    users,
 )
 
 def main_menu():
@@ -96,6 +97,8 @@ def server_menu():
         elif choice == "4":
             all_servers()
         elif choice == "5":
+            users()
+        elif choice == "6":
             main_menu()
         else:
             print("")
@@ -116,7 +119,8 @@ def server_menu_prompt():
     print("2. Delete Server")
     print("3. Lookup Server by ID")
     print("4. List All Servers")
-    print("5. Return to Main Menu")
+    print("5. List User Population of Server")
+    print("6. Return to Main Menu")
     print("")
 
 if __name__ == "__main__":

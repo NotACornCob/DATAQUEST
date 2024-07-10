@@ -62,8 +62,7 @@ class Server:
         CURSOR.execute(sql, (self.name,self.player_max))
         CONN.commit()
 
-        self.id = CURSOR.lastrowid 
-        ipdb.set_trace()
+        self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
     
     def delete_server(self):
@@ -138,6 +137,3 @@ class Server:
         return [
             User.instance_from_db(row) for row in rows
         ]
-    
-atlantic = Server.create_server("Atlantic",12)
-atlantic.users()

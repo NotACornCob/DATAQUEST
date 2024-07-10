@@ -22,7 +22,8 @@ def seed_database():
     fortnite = User.create_user("fortnite","fortnite",2)
     turtlewizard = User.create_user("Turtle Wizard","mana345",2)
     malenia = User.create_user("Malenia","Miquella",2)
-    atlantic.users()
+    print(atlantic.users())
+    print(malenia.server())
 
 seed_database()
 

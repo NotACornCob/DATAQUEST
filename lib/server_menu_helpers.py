@@ -51,6 +51,24 @@ def all_servers():
       print("")
       print("Returning to Server Menu!")
 
+def users():
+    list = Server.all_servers()
+    print("")
+    print("Please select a server by ID#:")
+    print("")
+    for server in list:
+         print(server)
+    print("")
+    id_ = input()
+    server = Server.find_by_id(id_)
+    print("")
+    print(f"{server.name} server population: {len(server.users())}")
+    print("")
+    print(server.users())
+    print("")
+    print("Returning to Server Menu!")
+
+
 def exit_program():
     print("See you next time!")
     exit()

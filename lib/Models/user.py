@@ -14,7 +14,7 @@ class User:
         self.password = password
     
     def __repr__(self):
-        return f"<User {self.id}: {self.name}>"
+        return f"<{self.name}>"
     
     @property
     def name(self):
@@ -28,14 +28,14 @@ class User:
 
     @property
     def password(self):
-        self._password
+        return self._password
     
     @password.setter
     def password(self,password):
-        if len(password) > 5: 
-            self._password = password
-        else: return ValueError("Password must be greater than 5 characters in length")
-
+        """ if len(password) > 5:  """
+        self._password = password
+        """  else: return ValueError("Password must be greater than 5 characters in length")
+        """
     def add_to_server(self,server_id):
         self.server_id = server_id
 
@@ -43,20 +43,18 @@ class User:
     def create_user(cls,name,password,server_id):
         '''Initialize a user instance and save user instance data to database'''
         user = cls(name,password,server_id)
-        user.save(name,password,server_id)
+        user.save()
         return user
-    
-    @classmethod
-    def save(self,name,password,server_id):
+
+    def save(self):
         """Add new user to database with provided username & password."""
         sql = """
             INSERT INTO users (username,password,server_id)
             VALUES (?,?,?)"""
-        CURSOR.execute(sql,(name,password,server_id))
+        CURSOR.execute(sql,(self.name,self.password,self.server_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
         self.all[self.id] = self
-        self.server_id = server_id
 
     @classmethod 
     def create_table(cls):
@@ -152,12 +150,11 @@ class User:
         CONN.commit()
     
     def server(self):
-        from user import User
         sql = """
         SELECT * FROM users 
         WHERE server_id = ?"""
 
-        CURSOR.execute(sql, (self.server_id),)
+        CURSOR.execute(sql, (self.server_id,),)
         rows = CURSOR.fetchall()
         return [
             User.instance_from_db(row) for row in rows
