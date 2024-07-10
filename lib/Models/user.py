@@ -7,8 +7,9 @@ class User:
 
     all = {}
 
-    def __init__(self,name,password,id=None):
+    def __init__(self,name,password,server_id=1,id=None):
         self.id= id
+        self.server_id = server_id
         self.name = name
         self.password = password
     
@@ -39,22 +40,23 @@ class User:
         self.server_id = server_id
 
     @classmethod
-    def create_user(cls,name,password):
+    def create_user(cls,name,password,server_id):
         '''Initialize a user instance and save user instance data to database'''
-        user = cls(name,password)
-        user.save(name,password)
+        user = cls(name,password,server_id)
+        user.save(name,password,server_id)
         return user
     
     @classmethod
-    def save(self,name,password):
+    def save(self,name,password,server_id):
         """Add new user to database with provided username & password."""
         sql = """
-            INSERT INTO users (username,password)
-            VALUES (?,?)"""
-        CURSOR.execute(sql,(name,password))
+            INSERT INTO users (username,password,server_id)
+            VALUES (?,?,?)"""
+        CURSOR.execute(sql,(name,password,server_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
         self.all[self.id] = self
+        self.server_id = server_id
 
     @classmethod 
     def create_table(cls):
@@ -145,6 +147,19 @@ class User:
         sql = """
         UPDATE users
         SET server_id = ?
-        WHERE username = ?"""
-        CURSOR.execute(sql,(self.server_id,self.name))
+        WHERE id = ?"""
+        CURSOR.execute(sql,(str(self.server_id),self.id))
         CONN.commit()
+    
+    def server(self):
+        from user import User
+        sql = """
+        SELECT * FROM users 
+        WHERE server_id = ?"""
+
+        CURSOR.execute(sql, (self.server_id),)
+        rows = CURSOR.fetchall()
+        return [
+            User.instance_from_db(row) for row in rows
+        ]
+    

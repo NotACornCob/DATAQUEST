@@ -27,7 +27,7 @@ class Server:
     
     @property
     def player_max(self):
-        self._player_max
+        return self._player_max
     
     @player_max.setter
     def player_max(self,player_max):
@@ -54,15 +54,16 @@ class Server:
         CURSOR.execute(sql)
         CONN.commit()
 
-    @classmethod
-    def save(self,name,player_max):
+    def save(self):
         """Add new server to database with provided name & player_max."""
         sql = """
-            INSERT INTO servers (name,player_max)
+            INSERT INTO servers (name, player_max)
             VALUES (?,?)"""
-        CURSOR.execute(sql,(name,player_max))
+        CURSOR.execute(sql, (self.name,self.player_max))
         CONN.commit()
-        self.id = CURSOR.lastrowid
+
+        self.id = CURSOR.lastrowid 
+        ipdb.set_trace()
         type(self).all[self.id] = self
     
     def delete_server(self):
@@ -92,7 +93,7 @@ class Server:
     def create_server(cls,name,player_max):
         '''Initialize a server instance and save server instance data to database'''
         server = cls(name,player_max)
-        server.save(name,player_max)
+        server.save()
         return server
     
     @classmethod
@@ -117,8 +118,16 @@ class Server:
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
+    def update(self):
+        """Update table row corresponding to current user instance"""
+        sql = """
+        UPDATE users
+        SET name = ?, password = ?"""
+        CURSOR.execute(sql,(str(self.name),str(self.password)))
+        CONN.commit()
+
     def users(self):
-        from user import User
+        from Models.user import User
         sql = """
             SELECT * FROM users
             WHERE server_id = ?
@@ -129,6 +138,6 @@ class Server:
         return [
             User.instance_from_db(row) for row in rows
         ]
-server = Server("server",12)
-Server.find_by_id(1)
-Server.create_server("Atlantic","12")
+    
+atlantic = Server.create_server("Atlantic",12)
+atlantic.users()

@@ -2,10 +2,9 @@
 # lib/debug.py
 
 from Models.__init__ import CONN, CURSOR
-from lib.Models.server import Server 
-from lib.Models.user import User
+from Models.server import Server 
+from Models.user import User
 import ipdb
-ipdb.set_trace()
 class Server:
 
     all = {}
@@ -67,6 +66,7 @@ class Server:
         CONN.commit()
         self.id = CURSOR.lastrowid
         self.all[self.id] = self
+        ipdb.set_trace()
     
     def delete_server(self):
         sql = """
@@ -119,3 +119,5 @@ class Server:
 
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+Server.save("thing",4)
