@@ -1,26 +1,29 @@
-from models.__init__ import CURSOR, CONN
+#lib/models/server.py
+from Models.__init__ import CURSOR, CONN
+import ipdb
 
 class Server:
 
     all = {}
 
-    def __init__(self,name=None,player_max=12,id=None):
+    def __init__(self,name,player_max,id=None):
         self.id = id
         self.name = name
         self.player_max = player_max
         
     def __repr__(self):
-        return f"<Server {self.id}: {self.name}, {self.player_max}>"
-
+        return f"<Server {self.id}: {self.name}, players:{self.player_max}>"
+    
     @property
     def name(self):
-        self._name 
+       return self._name 
 
     @name.setter
     def name(self,name):
         if len(name) > 5:
             self._name = name
-        else: return ValueError("Name must be greater than 5 characters in length")
+        else: 
+            return ValueError("Name must be greater than 5 characters in length")
     
     @property
     def player_max(self):
@@ -28,9 +31,9 @@ class Server:
     
     @player_max.setter
     def player_max(self,player_max):
-        if 1 <= int(player_max) <= 16:
-            self._player_max = player_max
-        else: return ValueError("Server max must be between 1 and 16 users")
+        """ if (1 <= player_max <= 16): """
+        self._player_max = player_max
+        """ else: return ValueError("Server max must be between 1 and 16 users") """
     
     @classmethod
     def create_table(cls):
@@ -57,8 +60,10 @@ class Server:
         sql = """
             INSERT INTO servers (name,player_max)
             VALUES (?,?)"""
-        CURSOR.execute(sql,(str(name),int(player_max)))
+        CURSOR.execute(sql,(name,player_max))
         CONN.commit()
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
     
     def delete_server(self):
         sql = """
@@ -86,7 +91,7 @@ class Server:
     @classmethod
     def create_server(cls,name,player_max):
         '''Initialize a server instance and save server instance data to database'''
-        server = cls(str(name),str(player_max))
+        server = cls(name,player_max)
         server.save(name,player_max)
         return server
     
@@ -98,5 +103,32 @@ class Server:
         WHERE id = ?
         """
 
-        row = CURSOR.execute(sql, (id)).fetchone()
+        row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def all_servers(cls):
+        """Return a list containing a Department object per row in the table"""
+        sql = """
+            SELECT *
+            FROM servers
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+    
+    def users(self):
+        from user import User
+        sql = """
+            SELECT * FROM users
+            WHERE server_id = ?
+        """
+        CURSOR.execute(sql, (self.id,),)
+
+        rows = CURSOR.fetchall()
+        return [
+            User.instance_from_db(row) for row in rows
+        ]
+server = Server("server",12)
+Server.find_by_id(1)
+Server.create_server("Atlantic","12")

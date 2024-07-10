@@ -1,6 +1,6 @@
 import click 
 
-from models.server import Server
+from Models.server import Server
 import ipdb
 
 def create_server():
@@ -10,11 +10,11 @@ def create_server():
         print(f"Server Name Set to {name}")
         print("")
         print("Enter Max Player Count")
-        player_max = input()
-        if 1 <= int(player_max) <= 16: 
-            print(f"Max Player Count Set to {player_max}")
+        max = input()
+        if 1 <= int(max) <= 16: 
+            print(f"Max Player Count Set to {max}")
             Server.create_table()
-            Server.create_server(name,player_max)
+            Server.create_server(name,max)
             print("")
             print("***Server Created!***")
             print("")
@@ -35,16 +35,19 @@ def delete_server():
         else:
             print("No server attached to provided id")
 
-
 def lookup_server():
-        print("")
-        print("***Looked Up Server***")
-        print("")
-        print("Returning to Server Menu!")
+        print("Enter a Server ID")
+        id_ = input()
+        server = Server.find_by_id(id_)
+        print(server) if server else print(f"No server attached to id {id_}")
 
 def all_servers():
+      servers = Server.all_servers()
       print("")
-      print("***List of All Servers***")
+      print("Listing All Servers:")
+      print("")
+      for server in servers:
+        print(server)
       print("")
       print("Returning to Server Menu!")
 
