@@ -5,6 +5,7 @@ from user_menu_helpers import (
     create_user,
     delete_user,
     lookup_user,
+    lookup_user_server,
     all_users,
 )
 
@@ -58,9 +59,11 @@ def user_account_menu():
         elif choice == "3":
             lookup_user()
         elif choice == "4":
-            all_users()
+            lookup_user_server()
         elif choice == "5":
-            main_menu()   
+            all_users()
+        elif choice == "6":
+            main_menu() 
         else:
             print("") 
             print("Invalid choice. The User Account Menu Returns a Critical Hit!")
@@ -80,8 +83,9 @@ def user_account_menu_prompt():
     print("1. Create User Account")
     print("2. Delete User Account")
     print("3. Lookup User by ID")
-    print("4. List All Users")
-    print("5. Return to Main Menu")
+    print("4. Lookup Users Server")
+    print("5. List All Users")
+    print("6. Return to Main Menu")
     print("")
 
 def server_menu():

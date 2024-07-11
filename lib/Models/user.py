@@ -150,13 +150,9 @@ class User:
         CONN.commit()
     
     def server(self):
+        from Models.server import Server
         sql = """
-        SELECT * FROM users 
-        WHERE server_id = ?"""
-
-        CURSOR.execute(sql, (self.server_id,),)
-        rows = CURSOR.fetchall()
-        return [
-            User.instance_from_db(row) for row in rows
-        ]
-    
+        SELECT * FROM servers
+        WHERE id = ?"""
+        rows = CURSOR.execute(sql, (self.server_id,),).fetchall()
+        return [Server.instance_from_db(row) for row in rows]

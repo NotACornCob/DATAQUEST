@@ -20,10 +20,10 @@ class Server:
 
     @name.setter
     def name(self,name):
-        if len(name) > 5:
-            self._name = name
-        else: 
-            return ValueError("Name must be greater than 5 characters in length")
+        """ if len(name) > 5: """
+        self._name = name
+        """  else: 
+            return ValueError("Name must be greater than 5 characters in length") """
     
     @property
     def player_max(self):

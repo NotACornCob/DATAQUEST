@@ -51,6 +51,21 @@ def all_users():
     print("")
     print("Returning to User Menu!")
 
+def lookup_user_server():
+    list = User.all_users()
+    print("")
+    print("Please select a user by ID#:")
+    print("")
+    for user in list:
+         print(user.id,user)
+    print("")
+    id_ = input()
+    user = User.lookup_user(id_)
+    print("")
+    print(f"{user} is currently active on: {user.server()}")
+    print("")
+    print("Returning to User Menu!")
+
 def exit_program():
     print("See you next time!")
     exit()
