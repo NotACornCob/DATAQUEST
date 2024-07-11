@@ -49,7 +49,7 @@ def lookup_user():
         user = User.lookup_user(id_)
         if user: 
             print("")
-            print(f"Your query returned the following user account: {user}")
+            print(f"Your query returned the following user account: {user} password: <{user.password}> server_id: <{user.server_id}>")
             print("")
             print("Returning to User Menu!")
         else: 
