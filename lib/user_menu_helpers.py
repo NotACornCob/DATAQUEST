@@ -1,7 +1,5 @@
-# lib/helpers.py
-import click 
-
-from Models.user import User
+# lib/user_menu_helpers.py
+from models.user import User
 
 def create_user():
     print("Enter a Username")

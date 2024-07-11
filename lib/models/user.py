@@ -1,6 +1,6 @@
 #lib/models/user.py
-from Models.__init__ import CONN, CURSOR
-from Models.server import Server
+from models.__init__ import CONN, CURSOR
+from models.server import Server
 
 class User:
 
@@ -146,7 +146,7 @@ class User:
         CONN.commit()
     
     def server(self):
-        from Models.server import Server
+        from models.server import Server
         sql = """
         SELECT * FROM servers
         WHERE id = ?"""

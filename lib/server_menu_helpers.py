@@ -1,7 +1,5 @@
-import click 
-
-from Models.server import Server
-import ipdb
+# lib/server_menu_helpers.py
+from models.server import Server
 
 def create_server():
     print("Enter a Server Name")

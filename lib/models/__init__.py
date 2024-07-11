@@ -1,4 +1,4 @@
-# lib/config.py
+#lib/models/init.py
 import sqlite3
 
 CONN = sqlite3.connect('/home/notacorncob/phase3/DATAQUEST/lib/dataquest.db')

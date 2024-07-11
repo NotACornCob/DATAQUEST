@@ -1,6 +1,5 @@
-from Models.__init__ import CURSOR, CONN
-from Models.server import Server 
-from Models.user import User
+from models.server import Server 
+from models.user import User
 
 def seed_database():
     User.drop_table()

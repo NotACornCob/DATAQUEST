@@ -1,5 +1,5 @@
 #lib/models/server.py
-from Models.__init__ import CURSOR, CONN
+from models.__init__ import CURSOR, CONN
 
 class Server:
 
@@ -11,7 +11,7 @@ class Server:
         self.player_max = player_max
         
     def __repr__(self):
-        return f"<Server {self.id}: {self.name}, players:{self.player_max}>"
+        return f"<Server {self.id}: {self.name}, max players:{self.player_max}>"
     
     @property
     def name(self):
@@ -116,7 +116,7 @@ class Server:
         return [cls.instance_from_db(row) for row in rows]
 
     def users(self):
-        from Models.user import User
+        from models.user import User
         sql = """
             SELECT * FROM users
             WHERE server_id = ?
