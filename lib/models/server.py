@@ -54,7 +54,6 @@ class Server:
         CONN.commit()
 
     def save(self):
-        """Add new server to database with provided name & player_max."""
         sql = """
             INSERT INTO servers (name, player_max)
             VALUES (?,?)"""
@@ -76,7 +75,6 @@ class Server:
     
     @classmethod
     def instance_from_db(cls,row):
-        """Return a Department object having the attribute values from the table row."""
         server = cls.all.get(row[0])
         if server:
             server.name = row[1]
@@ -89,7 +87,6 @@ class Server:
     
     @classmethod
     def create_server(cls,name,player_max):
-        '''Initialize a server instance and save server instance data to database'''
         server = cls(name,player_max)
         server.save()
         return server
@@ -107,7 +104,6 @@ class Server:
     
     @classmethod
     def all_servers(cls):
-        """Return a list containing a Department object per row in the table"""
         sql = """
             SELECT *
             FROM servers

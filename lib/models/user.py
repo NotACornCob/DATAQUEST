@@ -37,13 +37,11 @@ class User:
 
     @classmethod
     def create_user(cls,name,password,server_id):
-        '''Initialize a user instance and save user instance data to database'''
         user = cls(name,password,server_id)
         user.save()
         return user
 
     def save(self):
-        """Add new user to database with provided username & password."""
         sql = """
             INSERT INTO users (username,password,server_id)
             VALUES (?,?,?)"""
@@ -85,7 +83,6 @@ class User:
 
     @classmethod
     def instance_from_db(cls,row):
-        """Return a user object having the attribute values from the table row"""
         user = cls.all.get(row[0])
         if user:
             user.name = row[1]
@@ -97,7 +94,6 @@ class User:
         return user
     
     def update(self):
-        """Update table row corresponding to current user instance"""
         sql = """
         UPDATE users
         SET name = ?, password = ?"""
@@ -105,7 +101,6 @@ class User:
         CONN.commit()
 
     def delete_user(self):
-        """Delete row corresponding to current user instance"""
         sql = """
         DELETE FROM users
         WHERE id = ?

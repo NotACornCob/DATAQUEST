@@ -43,15 +43,13 @@ def delete_user():
 def lookup_user():
         list = User.all_users()
         print("")
-        print("Please select a user by ID#:")
-        print("")
-        for user in list:
-            print(user.id,user)
+        print("Please provide a user ID:")
         print("")
         id_ = input()
         user = User.lookup_user(id_)
         if user: 
-            print(user)
+            print("")
+            print(f"Your query returned the following user account: {user}")
             print("")
             print("Returning to User Menu!")
         else: 
