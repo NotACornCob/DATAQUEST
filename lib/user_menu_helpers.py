@@ -13,7 +13,7 @@ def create_user():
         password = input("")
         if len(password) > 5: 
             User.create_table()
-            User.create_user(username,password)
+            User.create_user(username,password,1)
             print("")
             print("***Account Created!***")
             print("")
@@ -24,15 +24,21 @@ def create_user():
         print("Username must be more than 5 characters")
 
 def delete_user():
-        print("Enter a User ID")
+        list = User.all_users()
+        print("")
+        print("Please select a user by ID#:")
+        print("")
+        for user in list:
+            print(user.id,user)
+        print("")
         id_ = input()
         if user := User.lookup_user(id_):
-            user.delete_user()
             print("")
-            print(f"***Deleted User Account {id_}***")
+            print(f"***Deleting User Account {user}***")
+            user.delete_user()
             print("Returning to User Menu!")
         else:
-             print("No user attached to provided id")
+            print("No user attached to provided id")
 
 def lookup_user():
         print("Enter a User ID")
@@ -47,7 +53,7 @@ def all_users():
     print("Listing All Users:")
     print("")
     for user in users:
-        print(user)
+        print(user.id,user)
     print("")
     print("Returning to User Menu!")
 

@@ -1,6 +1,7 @@
-CREATE TABLE users (
-  id INTEGER PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
     username TEXT,
     password TEXT,
-    foreign_key INTEGER
-);
+    server_id INTEGER,
+    FOREIGN KEY (server_id) REFERENCES servers(id)
+    )
