@@ -1,6 +1,5 @@
 #lib/models/server.py
 from Models.__init__ import CURSOR, CONN
-import ipdb
 
 class Server:
 
@@ -20,10 +19,9 @@ class Server:
 
     @name.setter
     def name(self,name):
-        """ if len(name) > 5: """
-        self._name = name
-        """  else: 
-            return ValueError("Name must be greater than 5 characters in length") """
+        if isinstance(name,str) and len(name) > 5:
+            self._name = name
+        else: raise ValueError("Name must be greater than 5 characters in length")
     
     @property
     def player_max(self):
@@ -31,9 +29,10 @@ class Server:
     
     @player_max.setter
     def player_max(self,player_max):
-        """ if (1 <= player_max <= 16): """
-        self._player_max = player_max
-        """ else: return ValueError("Server max must be between 1 and 16 users") """
+        if isinstance(player_max,int) and (1 <= int(player_max) <= 16):
+            self._player_max = player_max
+        else:
+            raise ValueError("player max must be an integer between 1 and 16")
     
     @classmethod
     def create_table(cls):

@@ -38,14 +38,29 @@ def delete_user():
             user.delete_user()
             print("Returning to User Menu!")
         else:
-            print("No user attached to provided id")
+            print("Error: No user attached to provided id")
+            print("Delete User Menu Lands a critical hit!")
+            print("Retreating to User Menu!")
 
 def lookup_user():
-        print("Enter a User ID")
+        list = User.all_users()
+        print("")
+        print("Please select a user by ID#:")
+        print("")
+        for user in list:
+            print(user.id,user)
+        print("")
         id_ = input()
         user = User.lookup_user(id_)
-        print(user) if user else print (f"No server attached to id {id_}")
-        print("Returning to User Menu!")
+        if user: 
+            print(user)
+            print("")
+            print("Returning to User Menu!")
+        else: 
+            print (f"Error: No server attached to id {id_}")
+            print("Lookup User Menu Lands a critical hit!")
+            print("Retreating to User Menu!")
+        
 
 def all_users():
     users = User.all_users()
@@ -73,5 +88,5 @@ def lookup_user_server():
     print("Returning to User Menu!")
 
 def exit_program():
-    print("See you next time!")
+    print("Thank you for playing DataQuest!")
     exit()

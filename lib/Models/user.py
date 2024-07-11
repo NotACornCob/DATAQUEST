@@ -1,7 +1,6 @@
 #lib/models/user.py
 from Models.__init__ import CONN, CURSOR
 from Models.server import Server
-import ipdb
 
 class User:
 
@@ -22,9 +21,9 @@ class User:
 
     @name.setter
     def name(self,name): 
-        if len(name) > 5:
+        if isinstance(name, str) and len(str(name)) > 5:
             self._name = name
-        else: return ValueError("Name must be greater than 5 characters in length")
+        else: raise ValueError("Name must be greater than 5 characters in length")
 
     @property
     def password(self):
@@ -32,12 +31,9 @@ class User:
     
     @password.setter
     def password(self,password):
-        """ if len(password) > 5:  """
-        self._password = password
-        """  else: return ValueError("Password must be greater than 5 characters in length")
-        """
-    def add_to_server(self,server_id):
-        self.server_id = server_id
+        if isinstance(password,str) and len(password) > 5: 
+            self._password = password
+        else: raise ValueError("Password must be greater than 5 characters in length")
 
     @classmethod
     def create_user(cls,name,password,server_id):
