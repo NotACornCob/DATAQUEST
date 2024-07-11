@@ -10,3 +10,4 @@ ipdb = "*"
 
 [requires]
 python_version = "3.8.13"
+sqlite3 = "3.46.0"
