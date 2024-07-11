@@ -25,27 +25,27 @@ Choosing this option will prompt you to create both a username and a password. B
 
 ### 2. Delete User Account 
 
-The script executes the delete_user() helper function. 
-
 The menu will provide you with a list of users. Select the ID of the user you would like to delete. The deleted account will be removed from the dataquest db. You will automatically return to the User Menu upon completion. 
+
+The script executes the delete_user() helper function. 
 
 ### 3. Lookup User by ID 
 
-The script executes the lookup_user() helper function. 
-
 The menu will ask for an ID# and, if the input is valid, return a corresponding user object. You will automatically return to the User Menu upon completion. 
+
+The script executes the lookup_user() helper function. 
 
 ### 4. Lookup Users Server
 
-The script executes the lookup_user_server() helper function.
-
 The menu will provide a list of users. Select the ID of the user you would like to learn about. If a valid selection is made, the menu will return the corresponding server of the user. 
+
+The script executes the lookup_user_server() helper function.
 
 ### 5. List All Users
 
-The script executes the all_users() helper function. 
-
 The menu will provide a list of all users currently in the DataQuest db. 
+
+The script executes the all_users() helper function. 
 
 ### 6. Return to Main Menu
 
@@ -57,33 +57,33 @@ The Server Menu has the following options:
 
 ### 1. Create Server
 
-The script executes the create_server() helper function.
-
 You will be prompted to create a server name and provide the max player count for the server. The server name must be greater than 5 characters in length. The player count must be between 1 and 16 inclusive. The newly created server will persist in the 'servers' table in the DataQuest db. You will automatically return to the Servers Menu upon completion. 
+
+The script executes the create_server() helper function.
 
 ### 2. Delete Server 
 
-The script executes the delete_server() helper function. 
-
 The menu will provide you with a list of servers. Select the ID of the server you would like to delete. The deleted server will be removed from the DataQuest db. You will automatically return to the Servers Menu upon completion. 
+
+The script executes the delete_server() helper function. 
 
 ### 3. Lookup Server by ID 
 
-The script executes the lookup_server() helper function.
-
 The menu will ask for a server ID# and, if the input is valid, return a corresponding server object. You will automatically return to the Server Menu upon completion. 
+
+The script executes the lookup_server() helper function.
 
 ### 4. List All Servers 
 
-The script executes the all_servers() helper function. 
-
 The menu will provide a list of all servers currently in the DataQuest db. 
+
+The script executes the all_servers() helper function. 
 
 ### 5. List User Population of Server
 
-The script executes the users() helper function.
-
 The menu will provide you with a list of servers. Select the ID of the server you want to learn about. The menu will provide a list of all users currently active on the server you selected. You will automatically return to the Servers Menu upon completion. 
+
+The script executes the users() helper function.
 
 ### 6. Return to Main Menu 
 
