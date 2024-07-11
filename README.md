@@ -1,146 +1,175 @@
-# Phase 3 CLI+ORM Project Template
 
-## Learning Goals
+# DataQuest
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+DataQuest is a project made for Phase 3 of FlatIron's coding bootcamp. It emulates an Admin CLI for a fictional MMO called "DataQuest". The project was coded in Python and SQL. 
 
----
+# CLI Script
 
-## Introduction
+From the root terminal, activate the CLI with the command 'python lib/cli.py'. 
 
-You now have a basic idea of what constitutes a CLI. Fork and clone this lesson
-for a project template for your CLI.
+The menu will open by informing you that admin access has been granted. 
 
-Take a look at the directory structure:
+From here, you can choose to either work with either the User Account menu or the Server menu (or quit the application).
 
-```console
-.
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-└── lib
-    ├── models
-    │   ├── __init__.py
-    │   └── model_1.py
-    ├── cli.py
-    ├── debug.py
-    └── helpers.py
-```
+You may notice that in the spirit of a good roguelike, DataQuest punishes the user harshly for providing invalid inputs. Expect to see a GAME OVER screen if you aren't careful...
 
-Note: The directory also includes two files named `CONTRIBUTING.md` and
-`LICENSE.md` that are specific to Flatiron's curriculum. You can disregard or
-delete the files if you want.
+## User Account Menu 
 
----
+The User Account Menu has a number of options available: 
 
-## Generating Your Environment
+1) Create User Account
 
-You might have noticed in the file structure- there's already a Pipfile!
+The script executes the create_user() helper function.
 
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
+Choosing this option will prompt you to create both a username and a password. Both must be longer than 6 characters in order to pass. The menu will automatically assign the account to a default server upon creation. The new account will persist in the 'users' table within the dataquest db. You will automatically return to the User Menu upon completion. 
 
-```console
-pipenv install
-pipenv shell
-```
+2) Delete User Account 
 
----
+The script executes the delete_user() helper function. 
 
-## Generating Your CLI
+The menu will provide you with a list of users. Select the ID of the user you would like to delete. The deleted account will be removed from the dataquest db. You will automatically return to the User Menu upon completion. 
 
-A CLI is, simply put, an interactive script and prompts the user and performs
-operations based on user input.
+3) Lookup User by ID 
 
-The project template has a sample CLI in `lib/cli.py` that looks like this:
+The script executes the lookup_user() helper function. 
 
-```py
-# lib/cli.py
+The menu will ask for an ID# and, if the input is valid, return a corresponding user object. You will automatically return to the User Menu upon completion. 
 
-from helpers import (
-    exit_program,
-    helper_1
-)
+4) Lookup Users Server
 
+The script executes the lookup_user_server() helper function.
 
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Invalid choice")
+The menu will provide a list of users. Select the ID of the user you would like to learn about. If a valid selection is made, the menu will return the corresponding server of the user. 
 
+5) List All Users
 
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+The script executes the all_users() helper function. 
 
+The menu will provide a list of all users currently in the DataQuest db. 
 
-if __name__ == "__main__":
-    main()
-```
+6) Return to Main Menu
 
-The helper functions are located in `lib/helpers.py`:
+The script executes the main_menu() function, returning you to the main menu. 
 
-```py
-# lib/helpers.py
+## Server Menu 
 
-def helper_1():
-    print("Performing useful function#1.")
+The Server Menu has the following options: 
 
+1) Create Server
 
-def exit_program():
-    print("Goodbye!")
-    exit()
-```
+The script executes the create_server() helper function.
 
-You can run the template CLI with `python lib/cli.py`, or include the shebang
-and make it executable with `chmod +x`. The template CLI will ask for input, do
-some work, and accomplish some sort of task.
+You will be prompted to create a server name and provide the max player count for the server. The server name must be greater than 5 characters in length. The player count must be between 1 and 16 inclusive. The newly created server will persist in the 'servers' table in the DataQuest db. You will automatically return to the Servers Menu upon completion. 
 
-Past that, CLIs can be whatever you'd like, as long as you follow the project
-requirements.
+2) Delete Server 
 
-Of course, you will update `lib/cli.py` with prompts that are appropriate for
-your application, and you will update `lib/helpers.py` to replace `helper_1()`
-with a useful function based on the specific problem domain you decide to
-implement, along with adding other helper functions to the module.
+The script executes the delete_server() helper function. 
 
-In the `lib/models` folder, you should rename `model_1.py` with the name of a
-data model class from your specific problem domain, and add other classes to the
-folder as needed. The file `lib/models/__init__.py` has been initialized to
-create the necessary database constants. You need to add import statements to
-the various data model classes in order to use the database constants.
+The menu will provide you with a list of servers. Select the ID of the server you would like to delete. The deleted server will be removed from the DataQuest db. You will automatically return to the Servers Menu upon completion. 
 
-You are also welcome to implement a different module and directory structure.
-However, your project should be well organized, modular, and follow the design
-principal of separation of concerns, which means you should separate code
-related to:
+3) Lookup Server by ID 
 
-- User interface
-- Data persistence
-- Problem domain rules and logic
+The script executes the lookup_server() helper function.
 
----
+The menu will ask for a server ID# and, if the input is valid, return a corresponding server object. You will automatically return to the Server Menu upon completion. 
 
-## Updating README.md
+4) List All Servers 
 
-`README.md` is a Markdown file that should describe your project. You will
-replace the contents of this `README.md` file with a description of **your**
-actual project.
+The script executes the all_servers() helper function. 
 
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this assignments's resources for a basic guide to Markdown.
+The menu will provide a list of all servers currently in the DataQuest db. 
 
-### What Goes into a README?
+5) List User Population of Server
+
+The script executes the users() helper function.
+
+The menu will provide you with a list of servers. Select the ID of the server you want to learn about. The menu will provide a list of all users currently active on the server you selected. You will automatically return to the Servers Menu upon completion. 
+
+6) Return to Main Menu 
+
+The script executes the main_menu() function, returning you to the main menu. 
+
+#Models
+
+DataQuest has two primary models: server and user. The relationship between the models is reflective of a one-to-many object relationship (one server for many users). 
+
+##Server Model
+
+The server model class initializes with name, player maximum, and id attributes. The name property controls for the data type (must be string) and name length (must be greater than 5). The player_max property controls for the data type (must be integer) and size (must be between 1 and 16, inclusive). The id attribute defaults to none and is set after assignment to the server table. 
+
+###create_server()
+
+Creating a new server starts with the create_server() class method, which activates both initialization and the save() function, which impliments the newly created server data in the database and sets the instance id to correspond with the SQL database id. 
+
+It requires a server name and player max argument.
+
+###delete_server()
+
+Deleting a server is handled with the delete_server() method. It requires a server argument.
+
+###find_by_id(), all_servers(), instance_from_db()
+
+Normal queries are handled by the find_by_id() and all_servers() class methods. Both methods utilize the instance_from_db() class method to return the queried data to the user. The instance_from_db takes the queried data and returns the corresponding instances that match the query. 
+
+find_by_id requires a server id argument. 
+
+###users()
+
+Queries that require data from the users table are handled by the users() method. It similarly sends the data it retrieves to the instance_from_db() method, but the User class version of the method instead of the Server class. In this case it will return a list of users that belong to a given server. 
+
+The model also includes class functions for creating and dropping the SQL 'servers' table. These are primarily used when seeding data for the DataQuest database. 
+
+##user Model 
+
+The user model class initializes with username, password, server_id, and id attributes. Both the username and password properties control for data type (must be a string) and name length (must be greater than 5). The server_id property defaults to 1 (Atlantic server). The id attribute defaults to none and is set after assignment to the user table. 
+
+###create_user()
+ 
+Similar to the Server class, creating a new user starts with the create_user() class method, which initializes the object and executes the save() function. The save() function impliments the newly created server data in the database and sets the instance id to correspond with the SQL database id.  
+
+It requires a username, password and server_id argument. 
+
+###delete_user()
+
+Deleting a server from the database is handled with the delete_user() method. It requires a user argument.
+
+###find_by_id(), all_users(), instance_from_db()
+
+Normal queries are handled by the find_by_id() and all_users() class methods. Both methods utilize the instance_from_db() class method to return the queried data to the user. The instance_from_db method takes the queried data and returns the corresponding instances that match the query. 
+
+find_by_id() requires a user id argument. 
+
+###server()
+
+Queries that require data from the servers table are handled by the server() method. It similarly sends the data it retrieves to the instance_from_db() method, but the Server class version of the method instead of the User class. In this case it will return the server that the given user account is active on.
+
+The model also includes class functions for creating and dropping the SQL 'users' table. These are primarily used when seeding data for the DataQuest database. 
+
+server() requires a user argument.  
+
+#License
+
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 This README serves as a template. Replace the contents of this file to describe
 the important files in your project and describe what they do. Each Python file
@@ -150,23 +179,3 @@ described with a sentence or two.
 Describe your actual CLI script first, and with a good level of detail. The rest
 should be ordered by importance to the user. (Probably functions next, then
 models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
-
-## Conclusion
-
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
-
-Happy coding!
-
----
-
-## Resources
-
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)

@@ -112,17 +112,8 @@ class Server:
             SELECT *
             FROM servers
         """
-
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
-    
-    def update(self):
-        """Update table row corresponding to current user instance"""
-        sql = """
-        UPDATE users
-        SET name = ?, password = ?"""
-        CURSOR.execute(sql,(str(self.name),str(self.password)))
-        CONN.commit()
 
     def users(self):
         from Models.user import User
@@ -133,6 +124,4 @@ class Server:
         CURSOR.execute(sql, (self.id,),)
 
         rows = CURSOR.fetchall()
-        return [
-            User.instance_from_db(row) for row in rows
-        ]
+        return [User.instance_from_db(row) for row in rows]

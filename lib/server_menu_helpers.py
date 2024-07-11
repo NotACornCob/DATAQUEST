@@ -42,7 +42,7 @@ def delete_server():
             print(f"***Server {id_} Deleted***")
             print("Returning to Server Menu!")
         else:
-            print("Error: No server attached to provided id")
+            print("Error: No Server Attached to Provided id")
             print("Delete Server Menu Lands a critical hit!")
             print("Retreating to Server Menu!")
 
